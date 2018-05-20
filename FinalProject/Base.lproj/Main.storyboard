@@ -52,9 +52,7 @@
                     </mapView>
                     <tabBarItem key="tabBarItem" title="Map" image="first" id="acW-dT-cKf"/>
                     <connections>
-                        <segue destination="Nsl-Zd-3c3" kind="popoverPresentation" id="md5-eU-2dx">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="Nsl-Zd-3c3" kind="presentation" identifier="showCheckIn" id="wcm-Bx-6wj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
