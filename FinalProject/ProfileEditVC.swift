@@ -10,6 +10,9 @@ import UIKit
 
 class ProfileEditVC: UIViewController {
 
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var favPlaceTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

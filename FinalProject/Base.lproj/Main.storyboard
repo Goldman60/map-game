@@ -33,10 +33,14 @@
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="djB-cl-yB2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="9pv-A4-QxB" id="2Mh-D9-QoX"/>
+                        </connections>
                     </mapView>
                     <tabBarItem key="tabBarItem" title="Map" image="first" id="acW-dT-cKf"/>
                     <connections>
-                        <segue destination="Nsl-Zd-3c3" kind="show" identifier="CheckIn Segue" id="AAm-fR-K80"/>
+                        <outlet property="mapObject" destination="djB-cl-yB2" id="h2v-zk-OIg"/>
+                        <segue destination="Nsl-Zd-3c3" kind="show" identifier="checkInSegue" id="AAm-fR-K80"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -46,7 +50,7 @@
         <!--Check In-->
         <scene sceneID="88w-sH-EWT">
             <objects>
-                <viewController title="Check In" id="Nsl-Zd-3c3" sceneMemberID="viewController">
+                <viewController title="Check In" id="Nsl-Zd-3c3" customClass="CheckInVC" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qw9-AJ-Etw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +74,7 @@
         <!--Leaderboards-->
         <scene sceneID="gya-4a-LiL">
             <objects>
-                <viewController id="gvM-we-HKJ" sceneMemberID="viewController">
+                <viewController id="gvM-we-HKJ" customClass="LeaderboardVC" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ymp-3N-IbX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +129,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wv4-Pg-lOR">
-                                <rect key="frame" x="123" y="88" width="129" height="116"/>
+                                <rect key="frame" x="130" y="88" width="130" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="##YOUR USERNAME##" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acg-jo-ZL0">
@@ -194,7 +198,7 @@
         <!--Profile Edit-->
         <scene sceneID="pai-og-PpS">
             <objects>
-                <viewController title="Profile Edit" id="H5S-RK-W9g" sceneMemberID="viewController">
+                <viewController title="Profile Edit" id="H5S-RK-W9g" customClass="ProfileEditVC" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cpV-PZ-4jQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,6 +261,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="FRD-Mm-3DE"/>
                     </view>
+                    <connections>
+                        <outlet property="favPlaceTextField" destination="8Wq-UQ-kLv" id="usj-8z-zhZ"/>
+                        <outlet property="usernameTextField" destination="wJi-BN-Uw6" id="hsK-uH-fZf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQS-me-iA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

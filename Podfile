@@ -9,4 +9,5 @@ target 'FinalProject' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 end
