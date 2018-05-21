@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */; };
 		21C28B7F20B0DFA700E34298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B7E20B0DFA700E34298 /* AppDelegate.swift */; };
-		21C28B8120B0DFA700E34298 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8020B0DFA700E34298 /* FirstViewController.swift */; };
-		21C28B8320B0DFA700E34298 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8220B0DFA700E34298 /* SecondViewController.swift */; };
+		21C28B8120B0DFA700E34298 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8020B0DFA700E34298 /* MapVC.swift */; };
+		21C28B8320B0DFA700E34298 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8220B0DFA700E34298 /* ProfileVC.swift */; };
 		21C28B8620B0DFA700E34298 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C28B8420B0DFA700E34298 /* Main.storyboard */; };
 		21C28B8820B0DFA800E34298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21C28B8720B0DFA800E34298 /* Assets.xcassets */; };
 		21C28B8B20B0DFA800E34298 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C28B8920B0DFA800E34298 /* LaunchScreen.storyboard */; };
@@ -20,10 +21,11 @@
 /* Begin PBXFileReference section */
 		1FCB910DBA0A2ED92AD201CC /* Pods-FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProject/Pods-FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		208B3BBB71AA4A6E8907EDB7 /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
+		219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		21C28B7B20B0DFA700E34298 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C28B7E20B0DFA700E34298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21C28B8020B0DFA700E34298 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		21C28B8220B0DFA700E34298 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		21C28B8020B0DFA700E34298 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		21C28B8220B0DFA700E34298 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		21C28B8520B0DFA700E34298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21C28B8720B0DFA800E34298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21C28B8A20B0DFA800E34298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,12 +69,13 @@
 			children = (
 				21C28B9220B0EDF800E34298 /* GoogleService-Info.plist */,
 				21C28B7E20B0DFA700E34298 /* AppDelegate.swift */,
-				21C28B8020B0DFA700E34298 /* FirstViewController.swift */,
-				21C28B8220B0DFA700E34298 /* SecondViewController.swift */,
+				21C28B8020B0DFA700E34298 /* MapVC.swift */,
+				21C28B8220B0DFA700E34298 /* ProfileVC.swift */,
 				21C28B8420B0DFA700E34298 /* Main.storyboard */,
 				21C28B8720B0DFA800E34298 /* Assets.xcassets */,
 				21C28B8920B0DFA800E34298 /* LaunchScreen.storyboard */,
 				21C28B8C20B0DFA800E34298 /* Info.plist */,
+				219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -232,9 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C28B8320B0DFA700E34298 /* SecondViewController.swift in Sources */,
+				21C28B8320B0DFA700E34298 /* ProfileVC.swift in Sources */,
 				21C28B7F20B0DFA700E34298 /* AppDelegate.swift in Sources */,
-				21C28B8120B0DFA700E34298 /* FirstViewController.swift in Sources */,
+				219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */,
+				21C28B8120B0DFA700E34298 /* MapVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
