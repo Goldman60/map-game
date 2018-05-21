@@ -132,9 +132,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showSchoolDetail") {
-            let vc = segue.destination as? SchoolDetailVC
-            vc?.school = schoolSelected
+        if (segue.identifier == "checkInSegue") {
+            let vc = segue.destination as! CheckInVC
+            vc.destPlace = selectedPlace
         }
     }
 }

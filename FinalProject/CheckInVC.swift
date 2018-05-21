@@ -9,6 +9,8 @@
 import UIKit
 
 class CheckInVC: UIViewController {
+    
+    var destPlace: Place?
 
     override func viewDidLoad() {
         super.viewDidLoad()
