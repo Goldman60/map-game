@@ -13,6 +13,8 @@
 		219BDF4B20B29ACF00AE57D6 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4A20B29ACF00AE57D6 /* UserData.swift */; };
 		219BDF4D20B2A1D800AE57D6 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4C20B2A1D800AE57D6 /* CheckInVC.swift */; };
 		219BDF4F20B2A21D00AE57D6 /* LeaderboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4E20B2A21D00AE57D6 /* LeaderboardVC.swift */; };
+		219BDF5120B3F67F00AE57D6 /* GoodCheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF5020B3F67F00AE57D6 /* GoodCheckInVC.swift */; };
+		219BDF5320B3F69700AE57D6 /* BadCheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF5220B3F69700AE57D6 /* BadCheckInVC.swift */; };
 		21C28B7F20B0DFA700E34298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B7E20B0DFA700E34298 /* AppDelegate.swift */; };
 		21C28B8120B0DFA700E34298 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8020B0DFA700E34298 /* MapVC.swift */; };
 		21C28B8320B0DFA700E34298 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C28B8220B0DFA700E34298 /* ProfileVC.swift */; };
@@ -32,6 +34,8 @@
 		219BDF4A20B29ACF00AE57D6 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		219BDF4C20B2A1D800AE57D6 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
 		219BDF4E20B2A21D00AE57D6 /* LeaderboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardVC.swift; sourceTree = "<group>"; };
+		219BDF5020B3F67F00AE57D6 /* GoodCheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodCheckInVC.swift; sourceTree = "<group>"; };
+		219BDF5220B3F69700AE57D6 /* BadCheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadCheckInVC.swift; sourceTree = "<group>"; };
 		21C28B7B20B0DFA700E34298 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C28B7E20B0DFA700E34298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21C28B8020B0DFA700E34298 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 				21C28B8020B0DFA700E34298 /* MapVC.swift */,
 				21C28B8220B0DFA700E34298 /* ProfileVC.swift */,
 				219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */,
+				219BDF5020B3F67F00AE57D6 /* GoodCheckInVC.swift */,
+				219BDF5220B3F69700AE57D6 /* BadCheckInVC.swift */,
 				21C28B8420B0DFA700E34298 /* Main.storyboard */,
 				21C28B8720B0DFA800E34298 /* Assets.xcassets */,
 				21C28B8920B0DFA800E34298 /* LaunchScreen.storyboard */,
@@ -262,11 +268,13 @@
 			files = (
 				219BDF4B20B29ACF00AE57D6 /* UserData.swift in Sources */,
 				21C28B8320B0DFA700E34298 /* ProfileVC.swift in Sources */,
+				219BDF5120B3F67F00AE57D6 /* GoodCheckInVC.swift in Sources */,
 				21C28B7F20B0DFA700E34298 /* AppDelegate.swift in Sources */,
 				219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */,
 				219BDF4F20B2A21D00AE57D6 /* LeaderboardVC.swift in Sources */,
 				219BDF4D20B2A1D800AE57D6 /* CheckInVC.swift in Sources */,
 				21C28B8120B0DFA700E34298 /* MapVC.swift in Sources */,
+				219BDF5320B3F69700AE57D6 /* BadCheckInVC.swift in Sources */,
 				219BDF4920B29AC200AE57D6 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

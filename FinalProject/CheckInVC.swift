@@ -12,15 +12,42 @@ class CheckInVC: UIViewController {
     
     var destPlace: Place?
 
+    @IBOutlet weak var bottomHalfView: UIView!
+    
+    private let topStackView = UIStackView()
+    fileprivate lazy var goodCheckInVC: GoodCheckInVC = buildFromStoryboard("Main")
+    fileprivate lazy var badCheckInVC: BadCheckInVC = buildFromStoryboard("Main")
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup child views for bottom
+        addChildViewController(goodCheckInVC)
+        addChildViewController(badCheckInVC)
+        
+        bottomHalfView.addSubview(goodCheckInVC.view)
+        bottomHalfView.addSubview(badCheckInVC.view)
+        
+        goodCheckInVC.didMove(toParentViewController: self)
+        badCheckInVC.didMove(toParentViewController: self)
 
-        // Do any additional setup after loading the view.
+        bottomHalfView.bringSubview(toFront: goodCheckInVC.view)
+        //TODO: User distance
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func buildFromStoryboard<T>(_ name: String) -> T {
+        let storyboard = UIStoryboard(name: name, bundle: nil)
+        let identifier = String(describing: T.self)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
+            fatalError("Missing \(identifier) in Storyboard")
+        }
+        return viewController
     }
     
 
