@@ -10,6 +10,7 @@ This is the early alpha of Map Game, a Pokemon Go/Old Foursquare/Ingress style a
 * Only Google based authentication is available
 * The app is targeted at iOS 10.3 as that is what my test device is capable of.
 * Some of the screens have improper (or no) constraints as I need to flesh out the data to see where the interface needs more or less space in real world usage
+* Due to a time crunch created by my Networks class I'm not quite as far along as I'd like to be
 
 ## APIs Used
 

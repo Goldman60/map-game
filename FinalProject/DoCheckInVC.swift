@@ -46,11 +46,16 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 print("Error uploading: \(error) for image: \(imagePath)")
             }
             else {
-                if let url = metadata?.downloadURL()?.absoluteString{
-                    print("Image uploaded at \(url)")
+                self.imagesRef.child(imagePath).downloadURL(completion: { (url, error) in
+                    guard let downloadURL = url else {
+                        // Uh-oh, an error occurred!
+                        return
+                    }
+                    
+                    print("Image uploaded at \(downloadURL.absoluteString)")
                     // version without callback - can use either one
                     //                    newPhotoInfoRef.updateChildValues(["photoKey" : url])
-                    newPhotoInfoRef.updateChildValues(["photoKey" : url])
+                    newPhotoInfoRef.updateChildValues(["photoKey" : downloadURL.absoluteString])
                     { error, databaseRef in
                         if let error = error {
                             print("Error updating image URL: \(error)")
@@ -60,7 +65,7 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                         }
                     }
                 }
-            }
+            )}
         }
     }
     
