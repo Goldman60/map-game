@@ -120,6 +120,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         print("didUpdate")
         let mostRecent = locations.last!
+        let center = CLLocationCoordinate2D(latitude: mostRecent.coordinate.latitude, longitude: mostRecent.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
         let newAnnotation = MKPointAnnotation()
         newAnnotation.coordinate = mostRecent.coordinate
@@ -128,6 +130,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         if UIApplication.shared.applicationState == .active {
             mapObject.showAnnotations(annotations, animated: true)
+            mapObject.setRegion(region, animated: true)
         }
     }
     
