@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             //Inital database init
         }
+        
+        print("Data reload?")
+        
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

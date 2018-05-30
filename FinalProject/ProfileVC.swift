@@ -22,14 +22,17 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var editUserLabel: UIButton!
     @IBOutlet weak var userRealNameLabel: UILabel!
     
+    var handle : AuthStateDidChangeListenerHandle?
+    
     @IBAction func signInButtonPressed(_ sender: GIDSignInButton) {
-         GIDSignIn.sharedInstance().signIn()
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            GIDSignIn.sharedInstance().disconnect()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
@@ -38,6 +41,12 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.reloadAuthData()
+        }
+    }
+    
+    func reloadAuthData() {
         if let user = Auth.auth().currentUser {
             googleSignInButton.isHidden = true
             logoutButton.isHidden = false
@@ -60,6 +69,12 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().uiDelegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     override func didReceiveMemoryWarning() {

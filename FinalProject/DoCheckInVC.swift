@@ -25,10 +25,7 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBOutlet weak var checkInPhoto: UIImageView!
     
-    @IBAction func completeCheckIn(_ sender: Any) {
-        
-    
-        
+    @IBAction func completeCheckIn(_ sender: Any) { //TODO: Flesh this out properly
         let photoInfo = PhotoInfo(title: "Test Image")
         
         let newPhotoInfoRef = databaseRef.child("Test Image")
