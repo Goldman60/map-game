@@ -1,32 +1,38 @@
 PODS:
-  - Firebase/Auth (4.13.0):
-    - Firebase/Core
-    - FirebaseAuth (= 4.6.1)
-  - Firebase/Core (4.13.0):
-    - FirebaseAnalytics (= 4.2.0)
-    - FirebaseCore (= 4.0.20)
-  - Firebase/Database (4.13.0):
-    - Firebase/Core
-    - FirebaseDatabase (= 4.1.5)
-  - FirebaseAnalytics (4.2.0):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - Firebase/Auth (5.1.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.0.0)
+  - Firebase/Core (5.1.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.1.0):
+    - FirebaseCore (= 5.0.2)
+  - Firebase/Database (5.1.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.0.1)
+  - Firebase/Storage (5.1.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.0.0)
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.6.1):
-    - FirebaseAnalytics (~> 4.2)
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+  - FirebaseAuth (5.0.0):
+    - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.20):
+  - FirebaseCore (5.0.2):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseDatabase (4.1.5):
-    - FirebaseAnalytics (~> 4.1)
-    - FirebaseCore (~> 4.0)
+  - FirebaseDatabase (5.0.1):
+    - FirebaseCore (~> 5.0)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.10):
-    - FirebaseCore (~> 4.0)
-  - GeoFire (2.0.1):
-    - Firebase/Database (~> 4.0)
+  - FirebaseInstanceID (3.0.0):
+    - FirebaseCore (~> 5.0)
+  - FirebaseStorage (3.0.0):
+    - FirebaseCore (~> 5.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GeoFire (3.0.0):
+    - Firebase/Database (~> 5.0)
   - GoogleSignIn (4.1.2):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -59,6 +65,8 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Database
+  - Firebase/Storage
   - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
   - GoogleSignIn
 
@@ -70,6 +78,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseDatabase
     - FirebaseInstanceID
+    - FirebaseStorage
     - GoogleSignIn
     - GoogleToolboxForMac
     - GTMOAuth2
@@ -83,17 +92,18 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   GeoFire:
-    :commit: dc408bcd4268cc5ec8831cda0000c23863767d42
+    :commit: 7bc124db5d7c428bffe7ee4bd10ea9ad55f54523
     :git: https://github.com/firebase/geofire-objc.git
 
 SPEC CHECKSUMS:
-  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
-  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
-  FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
-  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
-  FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
-  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
-  GeoFire: 3e70a24019dc16816190f533c9cac0d1321c4a71
+  Firebase: e08fb0795f35707aeb1d8a715c731c45bdf6fd56
+  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
+  FirebaseAuth: acbeef02fe7c3a26624e309849f3fe30c84115af
+  FirebaseCore: b81044df1044c0857a0737c6324678b72d4f7f00
+  FirebaseDatabase: 482bad9c2abd422bb2321194fb8c937e67426a89
+  FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
+  FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
+  GeoFire: e3ae6f4be3f2466c3467ef6c1c203db3af935c59
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
@@ -101,6 +111,6 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: d8c02467b18faaed51e9811aa58912c0153fc44b
+PODFILE CHECKSUM: 4e4287258f27e1233d2346f8598697b715109d0a
 
 COCOAPODS: 1.5.2

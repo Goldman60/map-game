@@ -606,44 +606,65 @@
             </objects>
             <point key="canvasLocation" x="2425" y="-683"/>
         </scene>
-        <!--View Controller-->
+        <!--Do Check InVC-->
         <scene sceneID="5HS-ch-z1O">
             <objects>
-                <viewController id="b7h-UC-gPm" sceneMemberID="viewController">
+                <viewController id="b7h-UC-gPm" customClass="DoCheckInVC" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JFj-Kl-fy7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUZ-KQ-sH2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUZ-KQ-sH2">
                                 <rect key="frame" x="35" y="458" width="126" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Complete Checkin"/>
+                                <connections>
+                                    <action selector="completeCheckIn:" destination="b7h-UC-gPm" eventType="touchUpInside" id="HH7-ff-QkA"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T08-Vg-CQa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T08-Vg-CQa">
                                 <rect key="frame" x="250" y="458" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To complete your check in, take a picture of the location!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td4-5O-W3T">
-                                <rect key="frame" x="16" y="20" width="343" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To complete your check in, take a picture of the location!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td4-5O-W3T">
+                                <rect key="frame" x="0.0" y="20" width="375" height="57"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AY5-Fb-CXD">
-                                <rect key="frame" x="67" y="85" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AY5-Fb-CXD">
+                                <rect key="frame" x="67" y="69" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="5aB-rA-yt4"/>
+                                    <constraint firstAttribute="width" secondItem="AY5-Fb-CXD" secondAttribute="height" multiplier="15:8" id="U70-zF-bgY"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tR-E7-NvQ">
-                                <rect key="frame" x="141" y="238" width="93" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tR-E7-NvQ">
+                                <rect key="frame" x="141" y="222" width="93" height="30"/>
                                 <state key="normal" title="Take a photo!"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="b7h-UC-gPm" eventType="touchUpInside" id="ILn-9n-PY0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qsP-WO-vtd" firstAttribute="trailing" secondItem="T08-Vg-CQa" secondAttribute="trailing" constant="77" id="H93-nk-L38"/>
+                            <constraint firstItem="AY5-Fb-CXD" firstAttribute="top" secondItem="Td4-5O-W3T" secondAttribute="bottom" constant="8" id="S9Y-AS-EeR"/>
+                            <constraint firstItem="MUZ-KQ-sH2" firstAttribute="leading" secondItem="qsP-WO-vtd" secondAttribute="leading" constant="35" id="bBv-za-PkL"/>
+                            <constraint firstItem="qsP-WO-vtd" firstAttribute="bottom" secondItem="T08-Vg-CQa" secondAttribute="bottom" constant="179" id="btS-G2-8of"/>
+                            <constraint firstItem="Td4-5O-W3T" firstAttribute="centerX" secondItem="qsP-WO-vtd" secondAttribute="centerX" id="fIT-en-56i"/>
+                            <constraint firstItem="AY5-Fb-CXD" firstAttribute="centerX" secondItem="qsP-WO-vtd" secondAttribute="centerX" id="gSk-Mr-jHu"/>
+                            <constraint firstItem="qsP-WO-vtd" firstAttribute="bottom" secondItem="MUZ-KQ-sH2" secondAttribute="bottom" constant="179" id="i91-ot-fbs"/>
+                            <constraint firstItem="1tR-E7-NvQ" firstAttribute="top" secondItem="AY5-Fb-CXD" secondAttribute="bottom" constant="25" id="ngP-f2-s9q"/>
+                            <constraint firstItem="1tR-E7-NvQ" firstAttribute="centerX" secondItem="qsP-WO-vtd" secondAttribute="centerX" id="oPF-ab-o2G"/>
+                            <constraint firstItem="Td4-5O-W3T" firstAttribute="top" secondItem="qsP-WO-vtd" secondAttribute="top" id="tca-Dk-JBY"/>
+                            <constraint firstItem="Td4-5O-W3T" firstAttribute="width" secondItem="JFj-Kl-fy7" secondAttribute="width" id="xt6-By-PCb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qsP-WO-vtd"/>
                     </view>
+                    <connections>
+                        <outlet property="checkInPhoto" destination="AY5-Fb-CXD" id="DL6-wg-p8N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkA-2U-Bgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
