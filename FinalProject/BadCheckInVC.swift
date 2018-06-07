@@ -10,6 +10,8 @@ import UIKit
 
 class BadCheckInVC: UIViewController {
 
+    @IBOutlet weak var targetDistance: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

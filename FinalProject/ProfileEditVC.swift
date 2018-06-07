@@ -7,16 +7,39 @@
 //
 
 import UIKit
+import Photos
+import Firebase
 
-class ProfileEditVC: UIViewController {
+class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var favPlaceTextField: UITextField!
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    var publicDatabaseRef : DatabaseReference!
+    var imagesRef  :  StorageReference!
+    
+    @IBAction func replaceImagePressed(_ sender: Any) {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let user = Auth.auth().currentUser { // User is happily logged in
+            publicDatabaseRef = Database.database().reference().child("publicusers").child(user.uid)
+            imagesRef = Storage.storage().reference().child("images").child("profile")
+            
+            //TODO: fill fields with existing values
+        }
+        else { // User is not logged in for whatever reason
+            performSegue(withIdentifier: "unwindFromCancel", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,14 +48,29 @@ class ProfileEditVC: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "unwindFromSave") {
+            // Persist user data
+        }
     }
-    */
+    
+    // MARK: - UIImagePickerControllerDelegate methods
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        
+        profileImage.image = image
+        
+        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion:nil)
+    }
 
 }

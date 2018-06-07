@@ -7,20 +7,26 @@
 //
 
 import UIKit
+import CoreLocation
 
-class CheckInVC: UIViewController {
+class CheckInVC: UIViewController, CLLocationManagerDelegate {
     
     var destPlace: Place?
 
     @IBOutlet weak var bottomHalfView: UIView!
+    @IBOutlet weak var placeNameLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var placeImage: UIImageView!
     
     private let topStackView = UIStackView()
     fileprivate lazy var goodCheckInVC: GoodCheckInVC = buildFromStoryboard("Main")
     fileprivate lazy var badCheckInVC: BadCheckInVC = buildFromStoryboard("Main")
+    let locationManager = CLLocationManager()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initLocationManager()
         
         //Setup child views for bottom
         addChildViewController(goodCheckInVC)
@@ -32,8 +38,36 @@ class CheckInVC: UIViewController {
         goodCheckInVC.didMove(toParentViewController: self)
         badCheckInVC.didMove(toParentViewController: self)
 
-        bottomHalfView.bringSubview(toFront: goodCheckInVC.view)
-        //TODO: User distance
+        bottomHalfView.bringSubview(toFront: badCheckInVC.view)
+        
+        placeNameLabel.text = destPlace?.name
+        categoryLabel.text = destPlace?.category
+    }
+    
+    func initLocationManager() {
+        CLLocationManager.locationServicesEnabled()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 100.0
+        locationManager.startUpdatingLocation()
+    }
+    
+    // Used to keep distance to target up to date
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Recomputing user location")
+        let userLocation = locations.last!
+
+        let dist = userLocation.distance(from: CLLocation(latitude: destPlace!.latitude, longitude: destPlace!.longitude))
+        
+        badCheckInVC.targetDistance.text = String(format: "%0.2f", dist) + " meters"
+        
+        if (dist < 20) {
+            bottomHalfView.bringSubview(toFront: goodCheckInVC.view)
+        }
+        else {
+            bottomHalfView.bringSubview(toFront: badCheckInVC.view)
+        }
     }
 
     override func didReceiveMemoryWarning() {

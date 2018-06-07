@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        GIDSignIn.sharedInstance().signInSilently() //Refresh the oauth token and log in if the user is already logged in
+        
         return true
     }
     
@@ -47,10 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             //Inital database init
         }
-        
-        print("Data reload?")
-        
-        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

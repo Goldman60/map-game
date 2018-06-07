@@ -32,10 +32,16 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            GIDSignIn.sharedInstance().disconnect()
+            GIDSignIn.sharedInstance().disconnect() //Kill the oauth token so the user doesn't stay signed in in the background
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
+    }
+    
+    @IBAction func unwindFromSave(segue:UIStoryboardSegue) {
+    }
+    
+    @IBAction func unwindFromCancel(segue:UIStoryboardSegue) {
     }
     
     override func viewWillAppear(_ animated: Bool) {

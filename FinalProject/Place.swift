@@ -12,15 +12,13 @@ import MapKit
 
 class Place: NSObject, MKAnnotation, Codable {
     let ref: DatabaseReference?
+    var key: String
     
     var name: String
     var category: String
     var latitude: Double
     var longitude: Double
-    
-    var key: String {
-        return String(name.hashValue)
-    }
+    var elevation: Int
     
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -38,9 +36,11 @@ class Place: NSObject, MKAnnotation, Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         name = try values.decode(String.self, forKey: .name)
+        elevation = try values.decode(Int.self, forKey: .elevation)
         category = try values.decode(String.self, forKey: .category)
         latitude = try values.decode(Double.self, forKey: .latitude)
         longitude = try values.decode(Double.self, forKey: .longitude)
+        key = try values.decode(String.self, forKey: .key)
         ref = nil
     }
     
@@ -49,13 +49,17 @@ class Place: NSObject, MKAnnotation, Codable {
         case category
         case latitude
         case longitude
+        case elevation
+        case key
     }
     
-    init(name: String, category: String, latitude: Double, longitude: Double) {
+    init(name: String, category: String, elevation: Int, latitude: Double, longitude: Double, key: String) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.category = category
+        self.elevation = elevation
+        self.key = key
         self.ref = nil
         
         super.init()
@@ -68,6 +72,8 @@ class Place: NSObject, MKAnnotation, Codable {
         category = snapvalues["category"] as? String ?? "None"
         latitude = snapvalues["latitude"] as? Double ?? 0.0
         longitude = snapvalues["longitude"] as? Double ?? 0.0
+        elevation = snapvalues["elevation"] as? Int ?? 0
+        self.key = key
         ref = snapshot.ref
 
         super.init()
@@ -76,7 +82,9 @@ class Place: NSObject, MKAnnotation, Codable {
     func toAnyObject() -> Any {
         return [
             "name" : name,
+            "key" : key,
             "category" : category,
+            "elevation" : elevation,
             "latitude" : latitude,
             "longitude" : longitude,
         ]

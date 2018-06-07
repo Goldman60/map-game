@@ -24,7 +24,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var annotations = [MKPointAnnotation]()
     
     var selectedPlace: Place?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,20 +36,14 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         mapObject.setRegion(newRegion, animated: true)
         
         initLocationManager()
+        
         //One time Init
+        //THIS IS SLOW
         //initFirebase()
     }
     
-    func initFirebase() {
-        let newPlace = Place.init(name: "Baker Science", category: "Cool Building", latitude: 35.301366, longitude: -120.660441)
-        let newPlaceRef = self.databasePlacesRef?.child(newPlace.key)
-        newPlaceRef?.setValue(newPlace.toAnyObject())
-        
-        self.geoFire?.setLocation(CLLocation(latitude: newPlace.latitude, longitude: newPlace.longitude), forKey: newPlace.key)
-        
-    }
-    
     func updateRegionQuery() {
+        print("region updated")
         if let oldQuery = regionQuery {
             oldQuery.removeAllObservers()
         }
@@ -58,6 +52,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         regionQuery?.observe(.keyEntered, with: { (key, location) in
             self.databasePlacesRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
+                
+                print("Adding new place")
                 
                 let newPlace = Place(key: key, snapshot: snapshot)
                 self.addPlace(newPlace)
@@ -138,6 +134,65 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         if (segue.identifier == "checkInSegue") {
             let vc = segue.destination as! CheckInVC
             vc.destPlace = selectedPlace
+        }
+    }
+    
+    // -- MARK: Init firebase stuff
+    
+    let jsonString = "https://projects.ajfite.com/csc436-finalproject/basedata.json"
+    // This is a hastily converted XML file so it looks pretty bad
+    
+    //WARNING: This file is enormous and takes **MINUTES** to parse in the simulator
+    func initFirebase() {
+        print("Init firebase")
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let request = URLRequest(url: URL(string: jsonString)!)
+        
+        let task: URLSessionDataTask = session.dataTask(with: request, completionHandler: filterAndStoreData)
+        
+        task.resume()
+    }
+    
+    func filterAndStoreData(_ receivedData: Data?, _ response: URLResponse?, _ error: Error?) -> Void {
+        
+        if let data = receivedData {
+            do {
+                let decoder = JSONDecoder()
+                let nodeBase = try decoder.decode(NodeBase.self, from: data)
+                
+                var elevation = 0
+                var name = String()
+                var cat = String()
+                
+                for node in nodeBase.nodes {
+                    print("Loading Item")
+                    
+                    for keyVal in node.tags {
+                        let key = keyVal.attributes.key
+                        
+                        if (key == "elev") {
+                            elevation = Int(keyVal.attributes.value)!
+                        }
+                        else if (key == "name") {
+                            name = keyVal.attributes.value
+                        }
+                        else if (key == "amenity" || key == "natural") {
+                            cat = "\(keyVal.attributes.key): \(keyVal.attributes.value)"
+                        }
+                    }
+                    
+                    
+                    let place = Place(name: name, category: cat, elevation: elevation, latitude: Double(node.attributes.lat)!, longitude: Double(node.attributes.lon)!, key: node.attributes.id)
+                    
+                    let newPlaceRef = self.databasePlacesRef?.child(place.key)
+                    newPlaceRef?.setValue(place.toAnyObject())
+                    
+                    self.geoFire?.setLocation(CLLocation(latitude: place.latitude, longitude: place.longitude), forKey: place.key)
+                }
+            }
+            catch {
+                print("Decode Exception: \(error)")
+            }
         }
     }
 }
