@@ -10,7 +10,7 @@ import UIKit
 import Photos
 import Firebase
 
-class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var favPlaceTextField: UITextField!
@@ -18,6 +18,8 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     var publicDatabaseRef : DatabaseReference!
     var imagesRef  :  StorageReference!
+    
+    var userData : PublicUserData?
     
     @IBAction func replaceImagePressed(_ sender: Any) {
         let picker = UIImagePickerController()
@@ -32,9 +34,6 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         super.viewDidLoad()
         
         if let user = Auth.auth().currentUser { // User is happily logged in
-            publicDatabaseRef = Database.database().reference().child("publicusers").child(user.uid)
-            imagesRef = Storage.storage().reference().child("images").child("profile")
-            
             //TODO: fill fields with existing values
         }
         else { // User is not logged in for whatever reason
@@ -53,7 +52,9 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "unwindFromSave") {
-            // Persist user data
+            let vc = segue.destination as? ProfileVC
+            
+            vc?.publicUserData = userData!
         }
     }
     

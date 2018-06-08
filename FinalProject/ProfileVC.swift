@@ -22,7 +22,12 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var editUserLabel: UIButton!
     @IBOutlet weak var userRealNameLabel: UILabel!
     
+    var publicUserData: PublicUserData = PublicUserData()
+    
     var handle : AuthStateDidChangeListenerHandle?
+    
+    var publicDatabaseRef : DatabaseReference!
+    var imagesRef  :  StorageReference!
     
     @IBAction func signInButtonPressed(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
@@ -39,6 +44,8 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     }
     
     @IBAction func unwindFromSave(segue:UIStoryboardSegue) {
+        let editUserRef = self.publicDatabaseRef.child(publicUserData.key)
+        editUserRef.setValue(publicUserData.toAnyObject())
     }
     
     @IBAction func unwindFromCancel(segue:UIStoryboardSegue) {
@@ -54,10 +61,24 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     
     func reloadAuthData() {
         if let user = Auth.auth().currentUser {
+            publicDatabaseRef = Database.database().reference().child("publicusers")
+            imagesRef = Storage.storage().reference().child("images")
+            
+            self.publicDatabaseRef?.queryOrderedByKey().queryEqual(toValue: user.uid).observe(.value, with: {snapshot in
+                
+                self.publicUserData = PublicUserData(key:user.uid, snapshot:snapshot)
+            })
+            
+            if self.publicUserData.key == "" {
+                self.publicUserData = PublicUserData(key: user.uid)
+            }
+            
             googleSignInButton.isHidden = true
             logoutButton.isHidden = false
             editUserLabel.isHidden = false
             
+            usernameLabel.text = publicUserData.username
+            userPlaceLabel.text = publicUserData.favPlace
             userEmailLabel.text = user.email
             userRealNameLabel.text = user.displayName
         }
@@ -86,6 +107,14 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "editProfileSegue") {
+            let vc = segue.destination as? ProfileEditVC
+            
+            vc?.userData = publicUserData
+        }
     }
 }
 
