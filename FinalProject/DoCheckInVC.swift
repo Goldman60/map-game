@@ -30,7 +30,7 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let newPhotoInfoRef = databaseRef.child("Test Image")
         newPhotoInfoRef.setValue(photoInfo.toAny())
-        
+                
         let imageData = UIImageJPEGRepresentation(checkInPhoto.image!, 1.0)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"

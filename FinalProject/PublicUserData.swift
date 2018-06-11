@@ -13,6 +13,29 @@ class PublicUserData: Codable {
     var checkInCount: Int
     var username: String
     var favPlace: String
+    var profilePhotoKey: String
+    
+    var profileImage: UIImage? {
+        print("start image download")
+        
+        guard let url = URL(string: profilePhotoKey) else {
+            return nil
+        }
+        
+        guard let responseData = try? Data(contentsOf: url) else {
+            return nil
+        }
+        
+        print("Try image")
+        
+        let downloadedImage = UIImage(data: responseData)
+        
+        return downloadedImage
+    }
+    
+    var profilePhotoTitle: String {
+        return self.key
+    }
     
     let ref: DatabaseReference?
     var key: String
@@ -22,6 +45,7 @@ class PublicUserData: Codable {
         case username
         case favPlace
         case key
+        case profilePhotoKey
     }
     
     required init(from decoder: Decoder) throws {
@@ -31,6 +55,7 @@ class PublicUserData: Codable {
         username = try values.decode(String.self, forKey: .username)
         favPlace = try values.decode(String.self, forKey: .favPlace)
         key = try values.decode(String.self, forKey: .key)
+        profilePhotoKey = try values.decode(String.self, forKey: .profilePhotoKey)
         ref = nil
     }
     
@@ -40,6 +65,7 @@ class PublicUserData: Codable {
         username = snapvalues["username"] as? String ?? "Data Error"
         favPlace = snapvalues["favPlace"] as? String ?? "Data Error"
         checkInCount = snapvalues["checkInCount"] as? Int ?? 0
+        profilePhotoKey = snapvalues["profilePhotoKey"] as? String ?? ""
         self.key = key
         ref = snapshot.ref
     }
@@ -48,6 +74,7 @@ class PublicUserData: Codable {
         checkInCount = 0
         username = ""
         favPlace = ""
+        profilePhotoKey = ""
         self.key = key
         ref = nil
     }
@@ -57,6 +84,7 @@ class PublicUserData: Codable {
         username = ""
         favPlace = ""
         key = ""
+        profilePhotoKey = ""
         ref = nil
     }
     
@@ -65,6 +93,7 @@ class PublicUserData: Codable {
             "username" : username,
             "favPlace" : favPlace,
             "checkInCount" : checkInCount,
+            "profilePhotoKey" : profilePhotoKey,
         ]
     }
 }

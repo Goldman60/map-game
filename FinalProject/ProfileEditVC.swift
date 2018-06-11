@@ -6,6 +6,8 @@
 //  Copyright © 2018 AJ Fite. All rights reserved.
 //
 
+//TODO: Image
+
 import UIKit
 import Photos
 import Firebase
@@ -16,7 +18,6 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var favPlaceTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     
-    var publicDatabaseRef : DatabaseReference!
     var imagesRef  :  StorageReference!
     
     var userData : PublicUserData?
@@ -33,8 +34,15 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let user = Auth.auth().currentUser { // User is happily logged in
-            //TODO: fill fields with existing values
+        imagesRef = Storage.storage().reference().child("profileimages")
+        
+        if Auth.auth().currentUser != nil { // User is happily logged in
+            usernameTextField.text = userData?.username
+            favPlaceTextField.text = userData?.favPlace
+            
+            DispatchQueue.main.async {
+                self.profileImage.image = self.userData?.profileImage
+            }
         }
         else { // User is not logged in for whatever reason
             performSegue(withIdentifier: "unwindFromCancel", sender: self)
@@ -56,13 +64,61 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     }
 
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "unwindFromSave") {
             let vc = segue.destination as? ProfileVC
             
+            
+            if profileImage.image != nil {
+                doPhotoWork()
+            }
+            
+            userData?.favPlace = favPlaceTextField.text ?? ""
+            userData?.username = usernameTextField.text ?? ""
+            
             vc?.publicUserData = userData!
+        }
+    }
+    
+    func doPhotoWork() {        
+        if let user = Auth.auth().currentUser { // User is happily logged in
+            let photoInfo = PhotoInfo(title: user.uid)
+            
+            userData?.profilePhotoKey = photoInfo.photoKey;
+            
+            let imageData = UIImageJPEGRepresentation(profileImage.image!, 0.1)
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            let imagePath = user.uid + ".jpeg"
+            
+            self.imagesRef.child(imagePath).putData(imageData!, metadata: metadata) {
+                (metadata, error) in
+                
+                if let error = error {
+                    print("Error uploading: \(error.localizedDescription)")
+                }
+                else {
+                    self.imagesRef.child(imagePath).downloadURL(completion: {
+                        (url, error) in
+                        
+                        guard let downloadURL = url else {
+                            print("ERROR with images")
+                            return
+                        }
+                        
+                        let publicDatabaseRef = Database.database().reference().child("publicusers")
+                        
+                        print("Storing data \(downloadURL.absoluteString)")
+                        
+                        self.userData?.profilePhotoKey = downloadURL.absoluteString
+                        
+                        let editUserRef = publicDatabaseRef.child(self.userData!.key)
+                        editUserRef.setValue(self.userData!.toAnyObject())
+                    })
+                }
+            }
         }
     }
     

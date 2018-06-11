@@ -62,23 +62,26 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     func reloadAuthData() {
         if let user = Auth.auth().currentUser {
             publicDatabaseRef = Database.database().reference().child("publicusers")
-            imagesRef = Storage.storage().reference().child("images")
+            imagesRef = Storage.storage().reference().child("profileimages")
             
             self.publicDatabaseRef?.queryOrderedByKey().queryEqual(toValue: user.uid).observe(.value, with: {snapshot in
-                
                 self.publicUserData = PublicUserData(key:user.uid, snapshot:snapshot)
+                self.usernameLabel.text = self.publicUserData.username
+                self.userPlaceLabel.text = self.publicUserData.favPlace
+                
+                DispatchQueue.main.async {
+                    self.userImageLabel.image = self.publicUserData.profileImage
+                }
             })
             
             if self.publicUserData.key == "" {
                 self.publicUserData = PublicUserData(key: user.uid)
             }
-            
+
             googleSignInButton.isHidden = true
             logoutButton.isHidden = false
             editUserLabel.isHidden = false
             
-            usernameLabel.text = publicUserData.username
-            userPlaceLabel.text = publicUserData.favPlace
             userEmailLabel.text = user.email
             userRealNameLabel.text = user.displayName
         }

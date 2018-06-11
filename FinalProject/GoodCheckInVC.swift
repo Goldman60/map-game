@@ -21,6 +21,12 @@ class GoodCheckInVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindFromSave(segue:UIStoryboardSegue) {
+    }
+    
+    @IBAction func unwindFromCancel(segue:UIStoryboardSegue) {
+    }
+    
 
     /*
     // MARK: - Navigation

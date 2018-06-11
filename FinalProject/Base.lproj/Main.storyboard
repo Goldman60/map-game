@@ -298,14 +298,14 @@
                                 <rect key="frame" x="74" y="544" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
-                                    <segue destination="oRp-Dl-Hkc" kind="unwind" unwindAction="unwindFromSaveWithSegue:" id="9QG-wJ-4uh"/>
+                                    <segue destination="oRp-Dl-Hkc" kind="unwind" identifier="unwindFromSave" unwindAction="unwindFromSaveWithSegue:" id="cFS-pQ-tqf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-Yk-J45">
                                 <rect key="frame" x="238" y="544" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <segue destination="oRp-Dl-Hkc" kind="unwind" unwindAction="unwindFromCancelWithSegue:" id="ehX-GO-1N0"/>
+                                    <segue destination="oRp-Dl-Hkc" kind="unwind" identifier="unwindFromCancel" unwindAction="unwindFromCancelWithSegue:" id="cbs-bs-CZr"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJi-BN-Uw6">
@@ -647,12 +647,15 @@
                                 <rect key="frame" x="35" y="458" width="126" height="30"/>
                                 <state key="normal" title="Complete Checkin"/>
                                 <connections>
-                                    <action selector="completeCheckIn:" destination="b7h-UC-gPm" eventType="touchUpInside" id="HH7-ff-QkA"/>
+                                    <segue destination="jie-oa-jtX" kind="unwind" identifier="unwindFromSave" unwindAction="unwindFromSaveWithSegue:" id="Q58-kk-Arj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T08-Vg-CQa">
                                 <rect key="frame" x="250" y="458" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <segue destination="jie-oa-jtX" kind="unwind" identifier="unwindFromCancel" unwindAction="unwindFromCancelWithSegue:" id="6EG-qt-kjM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To complete your check in, take a picture of the location!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td4-5O-W3T">
                                 <rect key="frame" x="16" y="30" width="343" height="41"/>
@@ -696,6 +699,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkA-2U-Bgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jie-oa-jtX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3216.8000000000002" y="-683.20839580209895"/>
         </scene>
