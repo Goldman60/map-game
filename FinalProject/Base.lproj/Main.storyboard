@@ -696,6 +696,7 @@
                     </view>
                     <connections>
                         <outlet property="checkInPhoto" destination="AY5-Fb-CXD" id="DL6-wg-p8N"/>
+                        <outlet property="completeCheckInButton" destination="MUZ-KQ-sH2" id="Gem-nG-yYB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkA-2U-Bgs" userLabel="First Responder" sceneMemberID="firstResponder"/>

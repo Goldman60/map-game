@@ -14,56 +14,18 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     var databaseRef : DatabaseReference!
     var imagesRef  :  StorageReference!
-
+    
+    @IBOutlet weak var checkInPhoto: UIImageView!
+    @IBOutlet weak var completeCheckInButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         databaseRef = Database.database().reference().child("photoInfo")
         imagesRef = Storage.storage().reference().child("images")
+        
+        completeCheckInButton.isEnabled = false
 
         // Do any additional setup after loading the view.
-    }
-    
-    @IBOutlet weak var checkInPhoto: UIImageView!
-    
-    @IBAction func completeCheckIn(_ sender: Any) { //TODO: Flesh this out properly
-        let photoInfo = PhotoInfo(title: "Test Image")
-        
-        let newPhotoInfoRef = databaseRef.child("Test Image")
-        newPhotoInfoRef.setValue(photoInfo.toAny())
-                
-        let imageData = UIImageJPEGRepresentation(checkInPhoto.image!, 1.0)
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        let imagePath = "Test Image" + ".jpeg"
-        print(imagePath)
-        
-        self.imagesRef.child(imagePath).putData(imageData!, metadata: metadata) { (metadata, error) in
-            
-            if let error = error {
-                print("Error uploading: \(error) for image: \(imagePath)")
-            }
-            else {
-                self.imagesRef.child(imagePath).downloadURL(completion: { (url, error) in
-                    guard let downloadURL = url else {
-                        // Uh-oh, an error occurred!
-                        return
-                    }
-                    
-                    print("Image uploaded at \(downloadURL.absoluteString)")
-                    // version without callback - can use either one
-                    //                    newPhotoInfoRef.updateChildValues(["photoKey" : url])
-                    newPhotoInfoRef.updateChildValues(["photoKey" : downloadURL.absoluteString])
-                    { error, databaseRef in
-                        if let error = error {
-                            print("Error updating image URL: \(error)")
-                        }
-                        else {
-                            print("Image URL successfully updated.")
-                        }
-                    }
-                }
-            )}
-        }
     }
     
     @IBAction func takePhoto(_ sender: UIButton) {
@@ -89,6 +51,10 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         checkInPhoto.image = image
         
+        if checkInPhoto.image != nil {
+            completeCheckInButton.isEnabled = true
+        }
+        
         picker.dismiss(animated: true, completion:nil)
     }
     
@@ -96,15 +62,49 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion:nil)
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "unwindFromSave" {
+            let photoInfo = PhotoInfo(title: "Test Image")
+            
+            let newPhotoInfoRef = databaseRef.child("Test Image")
+            newPhotoInfoRef.setValue(photoInfo.toAny())
+            
+            let imageData = UIImageJPEGRepresentation(checkInPhoto.image!, 1.0)
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            let imagePath = "Test Image" + ".jpeg"
+            print(imagePath)
+            
+            self.imagesRef.child(imagePath).putData(imageData!, metadata: metadata) { (metadata, error) in
+                
+                if let error = error {
+                    print("Error uploading: \(error) for image: \(imagePath)")
+                }
+                else {
+                    self.imagesRef.child(imagePath).downloadURL(completion: { (url, error) in
+                        guard let downloadURL = url else {
+                            // Uh-oh, an error occurred!
+                            return
+                        }
+                        
+                        print("Image uploaded at \(downloadURL.absoluteString)")
+                        // version without callback - can use either one
+                        //                    newPhotoInfoRef.updateChildValues(["photoKey" : url])
+                        newPhotoInfoRef.updateChildValues(["photoKey" : downloadURL.absoluteString])
+                        { error, databaseRef in
+                            if let error = error {
+                                print("Error updating image URL: \(error)")
+                            }
+                            else {
+                                print("Image URL successfully updated.")
+                            }
+                        }
+                    }
+                )}
+            }
+        }
     }
-    */
-
 }
