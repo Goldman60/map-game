@@ -117,7 +117,7 @@
                                 <rect key="frame" x="0.0" y="7.5" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leader" rowHeight="57" id="aYi-zh-uzw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leader" rowHeight="57" id="aYi-zh-uzw" customClass="LeaderboardCell" customModule="FinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aYi-zh-uzw" id="yrs-Jd-hf1">
@@ -147,8 +147,17 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="indexLabel" destination="ph1-yq-nFh" id="6lb-vR-416"/>
+                                            <outlet property="pointsLabel" destination="A5b-uF-OIs" id="tgz-UJ-ffW"/>
+                                            <outlet property="usernameLabel" destination="Dqn-x1-vqY" id="Eoy-pM-6zL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gvM-we-HKJ" id="1zV-ka-56R"/>
+                                    <outlet property="delegate" destination="gvM-we-HKJ" id="0WR-om-qeb"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -161,6 +170,9 @@
                         <viewLayoutGuide key="safeArea" id="9Wx-rH-JGL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Leaderboards" image="first" id="9CS-D4-co4"/>
+                    <connections>
+                        <outlet property="table" destination="THk-m5-KT8" id="OOj-JP-Fo4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ne-ui-fri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -392,7 +404,7 @@
         <!--Achievements-->
         <scene sceneID="k0n-Qj-c5X">
             <objects>
-                <viewController title="Achievements" id="NKD-EG-hfm" sceneMemberID="viewController">
+                <viewController title="Achievements" id="NKD-EG-hfm" customClass="AchievementsVC" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M3p-nq-VnB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

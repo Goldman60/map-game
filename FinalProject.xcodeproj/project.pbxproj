@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		215AF69120C8AD1E004231DE /* JSONNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AF69020C8AD1E004231DE /* JSONNode.swift */; };
+		21875CFC20D06B8A0017CDBA /* AchievementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875CFB20D06B8A0017CDBA /* AchievementsVC.swift */; };
+		21875CFE20D0716D0017CDBA /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */; };
 		219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */; };
 		219BDF4720B28FD500AE57D6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 219BDF4620B28FD400AE57D6 /* README.md */; };
 		219BDF4920B29AC200AE57D6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4820B29AC200AE57D6 /* Place.swift */; };
@@ -32,6 +34,8 @@
 		1FCB910DBA0A2ED92AD201CC /* Pods-FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProject/Pods-FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		208B3BBB71AA4A6E8907EDB7 /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		215AF69020C8AD1E004231DE /* JSONNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNode.swift; sourceTree = "<group>"; };
+		21875CFB20D06B8A0017CDBA /* AchievementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsVC.swift; sourceTree = "<group>"; };
+		21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		219BDF4620B28FD400AE57D6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		219BDF4820B29AC200AE57D6 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -69,9 +73,9 @@
 		21C28B7220B0DFA700E34298 = {
 			isa = PBXGroup;
 			children = (
+				21C28B7C20B0DFA700E34298 /* Products */,
 				219BDF4620B28FD400AE57D6 /* README.md */,
 				21C28B7D20B0DFA700E34298 /* FinalProject */,
-				21C28B7C20B0DFA700E34298 /* Products */,
 				7695AF9311EE38E6E786C2BA /* Pods */,
 				E2249455D746D4D144DB255D /* Frameworks */,
 			);
@@ -93,6 +97,8 @@
 				219BDF4C20B2A1D800AE57D6 /* CheckInVC.swift */,
 				21B91FA420BE2E98007EE964 /* DoCheckInVC.swift */,
 				219BDF4E20B2A21D00AE57D6 /* LeaderboardVC.swift */,
+				21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */,
+				21875CFB20D06B8A0017CDBA /* AchievementsVC.swift */,
 				21C28B8020B0DFA700E34298 /* MapVC.swift */,
 				21C28B8220B0DFA700E34298 /* ProfileVC.swift */,
 				219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */,
@@ -277,9 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				215AF69120C8AD1E004231DE /* JSONNode.swift in Sources */,
+				21875CFE20D0716D0017CDBA /* LeaderboardCell.swift in Sources */,
 				21B91FA720BE37C4007EE964 /* PhotoInfo.swift in Sources */,
 				219BDF4B20B29ACF00AE57D6 /* PublicUserData.swift in Sources */,
 				21C28B8320B0DFA700E34298 /* ProfileVC.swift in Sources */,
+				21875CFC20D06B8A0017CDBA /* AchievementsVC.swift in Sources */,
 				219BDF5120B3F67F00AE57D6 /* GoodCheckInVC.swift in Sources */,
 				21C28B7F20B0DFA700E34298 /* AppDelegate.swift in Sources */,
 				219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */,

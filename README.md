@@ -2,16 +2,20 @@
 
 Designed and written by AJ Fite <afite@calpoly.edu> for CSC436 Spring 2018
 
-This is the early alpha of Map Game, a Pokemon Go/Old Foursquare/Ingress style augmented reality game.  The player travels around the real world checking in at locations to gain points and ownership over virtual locations corresponding to real world points of interest.
+This is the early beta of Map Game, a Pokemon Go/Old Foursquare/Ingress style augmented reality game.  The player travels around the real world checking in at locations to gain points and ownership over virtual locations corresponding to real world points of interest.
 
 ## Known Issues and Caveats
 
-* Most stuff isn't really working at the moment.  You can navigate the UI, sign in, and see some basic API interactivity, but beyond that its pretty non-functional
 * Only Google based authentication is available
 * The app is targeted at iOS 10.3 as that is what my test device is capable of.
-* Some of the screens have improper (or no) constraints as I need to flesh out the data to see where the interface needs more or less space in real world usage
-* Due to a time crunch created by my Networks class I'm not quite as far along as I'd like to be
 * Game only has functional data for the Western Continental United States (All states to the west of and including Montana, Wyoming, Colorado, and New Mexico)
+
+## Future Improvements
+
+To make the app "production ready" there are a number of things that would need to change
+
+* Currently much of the database management is done in app, this is great for practicing Swift and iOS, but not so great for later updateability or changing the backend.  I'd like to migrate a lot of the current in app database management to be behind a REST API
+* Needs more authentication options
 
 ## APIs Used
 
@@ -22,9 +26,10 @@ This is the early alpha of Map Game, a Pokemon Go/Old Foursquare/Ingress style a
 * Firebase Database
 * Firebase Filestore
 * Firebase Geofire
+* Firebase Cloud Functions (see the FirebaseCloudFuncs directory)
 * iOS Camera
 
-## Locations
+### Location Data
 
 Locations are exported from [OpenStreetMaps data dumps](https://download.geofabrik.de/north-america/us-west.html) using their [osmosis client](https://wiki.openstreetmap.org/wiki/Osmosis) and the following command:
 

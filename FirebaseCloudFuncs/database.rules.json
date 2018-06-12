@@ -9,12 +9,6 @@
     	".read": true,
     	".write": false,
     },
-    "users": { //Private user information: check in history
-      "$uid": {
-        ".read": "$uid === auth.uid",
-        ".write": "$uid === auth.uid",
-      }
-    },
     "publicusers": { //Public user information: points, profile pic, fav place, username
       "$uid": {
       	".read": "auth != null",
@@ -26,11 +20,15 @@
       	".write": "auth != null",
       	".read": "auth != null",
     },
-    "checkIn": { //Store user check in photos
+    "checkIn": { // Store user check in photos
         "$uid": {
         	".read": "auth != null",
         	".write": "$uid === auth.uid",
       	}
+    },
+    "leaderboard": {
+      ".read": true,
+      ".write": false,
     },
     ".read": true,
     ".write": "auth != null",

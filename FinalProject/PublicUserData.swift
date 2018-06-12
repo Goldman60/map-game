@@ -62,8 +62,8 @@ class PublicUserData: Codable {
     init(key: String, snapshot: DataSnapshot) {
         let snaptemp = snapshot.value as! [String : AnyObject]
         let snapvalues = snaptemp[key] as! [String : AnyObject]
-        username = snapvalues["username"] as? String ?? "Data Error"
-        favPlace = snapvalues["favPlace"] as? String ?? "Data Error"
+        username = snapvalues["username"] as? String ?? "Anonymous User"
+        favPlace = snapvalues["favPlace"] as? String ?? "No Favorite Place Set"
         checkInCount = snapvalues["checkInCount"] as? Int ?? 0
         profilePhotoKey = snapvalues["profilePhotoKey"] as? String ?? ""
         self.key = key
