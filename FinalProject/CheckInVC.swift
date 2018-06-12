@@ -35,6 +35,8 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
         bottomHalfView.addSubview(goodCheckInVC.view)
         bottomHalfView.addSubview(badCheckInVC.view)
         
+        goodCheckInVC.destPlace = destPlace
+        
         goodCheckInVC.didMove(toParentViewController: self)
         badCheckInVC.didMove(toParentViewController: self)
 
@@ -85,14 +87,18 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
     }
     
 
-    /*
     // MARK: - Navigation
 
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "doCheckInSegue" {
+            let destVC = segue.destination as? DoCheckInVC
+            
+            destVC?.checkInPlaceID = destPlace?.key
+        }
     }
-    */
-
+ */
 }

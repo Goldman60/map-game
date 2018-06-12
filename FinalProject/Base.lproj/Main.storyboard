@@ -598,7 +598,7 @@
                                 <rect key="frame" x="157" y="261" width="60" height="30"/>
                                 <state key="normal" title="Check In"/>
                                 <connections>
-                                    <segue destination="b7h-UC-gPm" kind="show" id="fU0-7P-xRS"/>
+                                    <segue destination="b7h-UC-gPm" kind="show" identifier="doCheckInSegue" id="fU0-7P-xRS"/>
                                 </connections>
                             </button>
                         </subviews>

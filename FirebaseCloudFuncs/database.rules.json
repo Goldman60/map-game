@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "geofire": { //Read only place query
+      ".read": true,
+      ".write": false,
+      ".indexOn": "g",
+    },
+    "places": { //Read only place store
+    	".read": true,
+    	".write": false,
+    },
+    "users": { //Private user information: check in history
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+      }
+    },
+    "publicusers": { //Public user information: points, profile pic, fav place, username
+      "$uid": {
+      	".read": "auth != null",
+        //".write": "auth != null",
+      	".write": "$uid === auth.uid",
+      }
+    },
+    "metaplaces": { //Used because places is ENORMOUS: owner, check in counts
+      	".write": "auth != null",
+      	".read": "auth != null",
+    },
+    "checkIn": { //Store user check in photos
+        "$uid": {
+        	".read": "auth != null",
+        	".write": "$uid === auth.uid",
+      	}
+    },
+    ".read": true,
+    ".write": "auth != null",
+  }
+}
