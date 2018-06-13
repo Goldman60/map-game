@@ -9,12 +9,21 @@
 import UIKit
 import Firebase
 
+// Due to time constraints this class has unfinished features
 class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     var imagesRef: StorageReference!
     var userData: PublicUserData?
     
-    var databasePlacesRef: DatabaseReference?
+    @IBOutlet weak var ownerPlaceTable: UITableView!
+    @IBOutlet weak var checkInCollection: UICollectionView!
+    
+    var databasePlacesRef: DatabaseReference!
+    var checkInsRef: DatabaseReference!
+    
+    var checkInCount: Int = 0
+    
+    var recentCheckIns: [UIImage] = [UIImage]()
     
     @IBOutlet weak var totalCheckInLabel: UILabel!
     @IBOutlet weak var mostVisitedLabel: UILabel!
@@ -24,7 +33,7 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return checkInCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,6 +74,26 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.mostVisitedLabel.text = "None!"
             }
         })
+        
+        //Recent Check ins
+        /* TODO: Time constraints, feature not implemented
+        checkInsRef = Database.database().reference().child("checkIn").child((userData?.key)!)
+        
+        checkInsRef.queryOrderedByKey().queryLimited(toLast: 10).observe(.childChanged, with: { snapshot in
+            self.recentCheckIns = [UIImage]()
+            
+            for child in snapshot.children {
+                let data = child as? DataSnapshot
+                
+                
+                
+            }
+            
+            checkInCount = snapshot.childrenCount
+            
+            
+        })
+        */
         
         totalCheckInLabel.text = String(userData!.checkInCount)
     }

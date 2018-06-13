@@ -9,6 +9,7 @@ This is the early beta of Map Game, a Pokemon Go/Old Foursquare/Ingress style au
 * Only Google based authentication is available
 * The app is targeted at iOS 10.3 as that is what my test device is capable of.
 * Game only has functional data for the Western Continental United States (All states to the west of and including Montana, Wyoming, Colorado, and New Mexico)
+* The Stats and Info page has 2 unimplemented features: A gallery of recent check in images and a list of places the player currently owns.   The data is available in Firebase but I ran up against time constraints and didn't have time to implement the logic to retrieve it.
 
 ## Future Improvements
 

@@ -106,7 +106,7 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         metaPlaceUser?.checkInCount += 1
         metaPlaceUser?.dateFromFirebase = dateStamp
         
-        metaplaceRef.child(checkInPlaceID!).child(user.uid).setValue(metaPlaceUser?.toAnyObject())
+    metaplaceRef.child(checkInPlaceID!).child(user.uid).setValue(metaPlaceUser?.toAnyObject())
     }
     
     func photoCheckIn() {
@@ -138,7 +138,7 @@ class DoCheckInVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 print("Error uploading: \(error) for image: \(imagePath)")
             }
             else {
-                self.imagesRef.child(imagePath).downloadURL(completion: { (url, error) in
+                self.imagesRef.child(user.uid).child(imagePath).downloadURL(completion: { (url, error) in
                     guard let downloadURL = url else {
                         // Uh-oh, an error occurred!
                         return

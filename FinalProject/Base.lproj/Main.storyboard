@@ -561,7 +561,9 @@
                         <viewLayoutGuide key="safeArea" id="FRl-G1-jnl"/>
                     </view>
                     <connections>
+                        <outlet property="checkInCollection" destination="yYR-ap-kuN" id="WMJ-ag-UVi"/>
                         <outlet property="mostVisitedLabel" destination="QO6-UI-DBv" id="gY9-yS-dO3"/>
+                        <outlet property="ownerPlaceTable" destination="ehR-xQ-Be9" id="lci-oK-1pO"/>
                         <outlet property="totalCheckInLabel" destination="1u6-Ix-tdC" id="flw-Mr-t6G"/>
                     </connections>
                 </viewController>
