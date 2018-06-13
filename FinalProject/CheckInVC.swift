@@ -19,8 +19,13 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var placeImage: UIImageView!
     
+    var publicDatabaseRef : DatabaseReference!
     var metaPlaceUser: MetaPlaceUser?
+    var ownerData: PublicUserData?
     var metaplaceRef: DatabaseReference!
+    var metaplaceOwnerRef: DatabaseReference!
+    var imagesRef: StorageReference!
+
     
     var handle : AuthStateDidChangeListenerHandle?
     
@@ -71,8 +76,12 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
         categoryLabel.text = destPlace?.category
         
         metaplaceRef = Database.database().reference().child("metaplaces")
+        metaplaceOwnerRef = Database.database().reference().child("metaplaces-owners")
+        publicDatabaseRef = Database.database().reference().child("publicusers")
+        imagesRef = Storage.storage().reference().child("profileimages")
         
         if let user = Auth.auth().currentUser {
+            // Gets your last check in
             metaplaceRef.child(destPlace!.key).queryOrderedByKey().queryEqual(toValue: user.uid).observe(.value, with: {snapshot in
                 if snapshot.hasChildren() {
                     self.metaPlaceUser = MetaPlaceUser(key:user.uid, snapshot:snapshot)
@@ -86,6 +95,46 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
                     
                     self.goodCheckInVC.lastCheckInLabel.text = "Never!"
                     self.goodCheckInVC.totalCheckInCount.text = "0"
+                }
+                
+                self.goodCheckInVC.metaPlaceUser = self.metaPlaceUser
+            })
+            
+            // Gets current place owner
+            metaplaceOwnerRef.queryOrderedByKey().queryEqual(toValue: destPlace!.key).observe(.value, with: {snapshot in
+                if let snaptemp = snapshot.value as? [String : AnyObject] {
+                    let snapvalues = snaptemp[self.destPlace!.key] as! [String : AnyObject]
+                    
+                    self.goodCheckInVC.ownerCheckInCount.text = String(snapvalues["checkInCount"] as? Int ?? 0)
+                    
+                    if let ownerID = snapvalues["ownerID"] as? String {
+                    self.publicDatabaseRef?.queryOrderedByKey().queryEqual(toValue: ownerID).observe(.value, with: {snapshotOwner in
+                            if let _ = snapshotOwner.value as? [String : AnyObject] {
+                                self.ownerData = PublicUserData(key: user.uid, snapshot: snapshotOwner)
+                            }
+                            else {
+                                self.ownerData = PublicUserData(key: user.uid)
+                            }
+                        
+                            self.goodCheckInVC.ownerFavPlace.text = self.ownerData?.favPlace
+                            self.goodCheckInVC.ownerUsername.text = self.ownerData?.username
+                        
+                            let userImage = self.imagesRef.child((self.ownerData?.profilePhotoShortKey)!)
+                        
+                            userImage.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                if let _ = error {
+                                    print(error!.localizedDescription)
+                                } else {
+                                    self.goodCheckInVC.ownerImage.image = UIImage(data: data!)
+                                }
+                            }
+                        })
+                    }
+                }
+                else {
+                    self.goodCheckInVC.ownerUsername.text = "No Owner!"
+                    self.goodCheckInVC.ownerFavPlace.text = "Check In to become the new owner!"
+                    self.goodCheckInVC.ownerCheckInCount.text = ""
                 }
                 
                 self.goodCheckInVC.metaPlaceUser = self.metaPlaceUser
@@ -111,7 +160,7 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
         
         badCheckInVC.targetDistance.text = String(format: "%0.2f", dist) + " meters"
         
-        if (dist < 20) {
+        if (dist < 500) {
             bottomHalfView.bringSubview(toFront: goodCheckInVC.view)
         }
         else {

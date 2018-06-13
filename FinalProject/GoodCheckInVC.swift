@@ -19,8 +19,10 @@ class GoodCheckInVC: UIViewController {
     @IBOutlet weak var lastCheckInLabel: UILabel!
     @IBOutlet weak var totalCheckInCount: UILabel!
     
-    @IBOutlet weak var yourStatsLabel: UILabel!
-    
+    @IBOutlet weak var ownerUsername: UILabel!
+    @IBOutlet weak var ownerFavPlace: UILabel!
+    @IBOutlet weak var ownerCheckInCount: UILabel!
+    @IBOutlet weak var ownerImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -14,6 +14,8 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     var imagesRef: StorageReference!
     var userData: PublicUserData?
     
+    var databasePlacesRef: DatabaseReference?
+    
     @IBOutlet weak var totalCheckInLabel: UILabel!
     @IBOutlet weak var mostVisitedLabel: UILabel!
     
@@ -22,7 +24,7 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -36,6 +38,20 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
 
         imagesRef = Storage.storage().reference().child("checkInImages")
+        
+        //Retrieve most checked in place
+        databasePlacesRef = Database.database().reference().child("places")
+        
+        databasePlacesRef?.queryOrderedByKey().queryEqual(toValue: userData?.mostCheckedInPlace).observeSingleEvent(of: .value, with: { snapshot in
+            if let _ = snapshot.value as? [String : AnyObject] {
+                let place = Place(key: self.userData!.mostCheckedInPlace, snapshot: snapshot)
+                
+                self.mostVisitedLabel.text = place.name
+            }
+            else {
+                self.mostVisitedLabel.text = "None!"
+            }
+        })
         
         totalCheckInLabel.text = String(userData!.checkInCount)
     }

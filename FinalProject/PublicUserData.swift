@@ -14,24 +14,7 @@ class PublicUserData: Codable {
     var username: String
     var favPlace: String
     var profilePhotoKey: String
-    
-    var profileImage: UIImage? {
-        print("start image download")
-        
-        guard let url = URL(string: profilePhotoKey) else {
-            return nil
-        }
-        
-        guard let responseData = try? Data(contentsOf: url) else {
-            return nil
-        }
-        
-        print("Try image")
-        
-        let downloadedImage = UIImage(data: responseData)
-        
-        return downloadedImage
-    }
+    var mostCheckedInPlace: String
     
     var profilePhotoTitle: String {
         return self.key
@@ -50,6 +33,7 @@ class PublicUserData: Codable {
         case favPlace
         case key
         case profilePhotoKey
+        case mostCheckedInPlace
     }
     
     required init(from decoder: Decoder) throws {
@@ -60,6 +44,7 @@ class PublicUserData: Codable {
         favPlace = try values.decode(String.self, forKey: .favPlace)
         key = try values.decode(String.self, forKey: .key)
         profilePhotoKey = try values.decode(String.self, forKey: .profilePhotoKey)
+        mostCheckedInPlace = try values.decode(String.self, forKey: .mostCheckedInPlace)
         ref = nil
     }
     
@@ -70,6 +55,7 @@ class PublicUserData: Codable {
         favPlace = snapvalues["favPlace"] as? String ?? "No Favorite Place Set"
         checkInCount = snapvalues["checkInCount"] as? Int ?? 0
         profilePhotoKey = snapvalues["profilePhotoKey"] as? String ?? ""
+        mostCheckedInPlace = snapvalues["mostCheckedInPlace"] as? String ?? ""
         self.key = key
         ref = snapshot.ref
     }
@@ -79,6 +65,7 @@ class PublicUserData: Codable {
         username = ""
         favPlace = ""
         profilePhotoKey = ""
+        mostCheckedInPlace = ""
         self.key = key
         ref = nil
     }
@@ -89,6 +76,7 @@ class PublicUserData: Codable {
         favPlace = ""
         key = ""
         profilePhotoKey = ""
+        mostCheckedInPlace = ""
         ref = nil
     }
     
@@ -98,6 +86,7 @@ class PublicUserData: Codable {
             "favPlace" : favPlace,
             "checkInCount" : checkInCount,
             "profilePhotoKey" : profilePhotoKey,
+            "mostCheckedInPlace" : mostCheckedInPlace,
         ]
     }
 }

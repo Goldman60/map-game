@@ -20,7 +20,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var geoFire: GeoFire?
     var regionQuery: GFRegionQuery?
     let locationManager = CLLocationManager()
-    //let cscBuilding = CLLocationCoordinate2D(latitude: 35.300066, longitude: -120.662065)
     var annotations = [MKPointAnnotation]()
     
     var selectedPlace: Place?
