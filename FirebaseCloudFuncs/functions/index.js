@@ -37,7 +37,7 @@ exports.updateMostVisited = functions.database.ref('/metaplaces/{placeID}/{userI
    .onWrite((snapshot, context) => {
       const newCandidate = snapshot.after.val();
 
-      return admin.database().ref('/publicusers/' + context.params.uid + '/mostCheckedInCount').once("value")
+      return admin.database().ref('/publicusers/' + context.params.userID + '/mostCheckedInCount').once("value")
          .then((dataSnapshot) => {
             if (dataSnapshot.val() === null || dataSnapshot.val() < newCandidate) {
                dataSnapshot.ref.set(newCandidate);
@@ -56,7 +56,9 @@ exports.updatePlaceOwner = functions.database.ref('/metaplaces/{placeID}/{userID
    
       return admin.database().ref('/metaplaces-owners/' + context.params.placeID).once("value")
          .then((dataSnapshot) => {
-            if (dataSnapshot.val() === null || dataSnapshot.child('checkInCount') < newCandidate) {
+            //console.log('Found a checkin count of ', dataSnapshot.child('checkInCount').val());
+
+            if (dataSnapshot.val() === null || dataSnapshot.child('checkInCount').val() < newCandidate) {
                dataSnapshot.ref.child('checkInCount').set(newCandidate);
                return dataSnapshot.ref.child('ownerID').set(context.params.userID);
             }

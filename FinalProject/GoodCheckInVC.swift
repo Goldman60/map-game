@@ -57,13 +57,22 @@ class GoodCheckInVC: UIViewController {
     }
     
     @IBAction func doCheckIn(_ sender: UIButton) {
+        // Production interval
         let oneHour = Calendar.current.date(
             byAdding: .hour,
             value: -1,
             to: Date())
+        let oneHourInSeconds = 3600.0
         
-        if metaPlaceUser!.lastCheckIn!.timeIntervalSince(oneHour!) > 0 {
-            let dialog = UIAlertController(title: "Too Soon", message: "You checked in here recently! Wait \(String(format: "%.0f", metaPlaceUser!.lastCheckIn!.timeIntervalSinceNow + 3600)) seconds", preferredStyle: .alert)
+        // Debug interval
+        let threeMinutes = Calendar.current.date(
+            byAdding: .minute,
+            value: -3,
+            to: Date())
+        let threeMinutesInSeconds = 180.0
+        
+        if metaPlaceUser!.lastCheckIn!.timeIntervalSince(threeMinutes!) > 0 {
+            let dialog = UIAlertController(title: "Too Soon", message: "You checked in here recently! Wait \(String(format: "%.0f", metaPlaceUser!.lastCheckIn!.timeIntervalSinceNow + threeMinutesInSeconds)) seconds", preferredStyle: .alert)
             
             let action = UIAlertAction(title: "Try Again Later", style: .cancel, handler: nil)
             dialog.addAction(action)
