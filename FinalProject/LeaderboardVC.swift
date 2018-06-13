@@ -40,13 +40,13 @@ class LeaderboardVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell!
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { //TODO: Make the leadearboard a bit less fragile
         super.viewDidLoad()
         
         ref = Database.database().reference().child("leaderboard")
         usernameRef = Database.database().reference().child("publicusers")
         
-        self.ref.queryOrderedByValue().queryLimited(toFirst: 20).observe(.value, with: { (snapshot: DataSnapshot) in
+        self.ref.queryOrderedByValue().queryLimited(toLast: 20).observe(.value, with: { (snapshot: DataSnapshot) in
             
             print("Retrieving Data")
             

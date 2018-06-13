@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class CheckInVC: UIViewController, CLLocationManagerDelegate {
     
@@ -17,6 +18,9 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var placeImage: UIImageView!
+    
+    var metaPlaceUser: MetaPlaceUser?
+    var metaplaceRef: DatabaseReference!
     
     private let topStackView = UIStackView()
     fileprivate lazy var goodCheckInVC: GoodCheckInVC = buildFromStoryboard("Main")
@@ -44,6 +48,28 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
         
         placeNameLabel.text = destPlace?.name
         categoryLabel.text = destPlace?.category
+        
+        metaplaceRef = Database.database().reference().child("metaplaces")
+        
+        if let user = Auth.auth().currentUser {
+            metaplaceRef.child(destPlace!.key).queryOrderedByKey().queryEqual(toValue: user.uid).observe(.value, with: {snapshot in
+                if snapshot.hasChildren() {
+                    self.metaPlaceUser = MetaPlaceUser(key:user.uid, snapshot:snapshot)
+                    
+                    self.goodCheckInVC.lastCheckInLabel.text = self.metaPlaceUser!.lastCheckIn?.description
+                    self.goodCheckInVC.totalCheckInCount.text = String(self.metaPlaceUser!.checkInCount)
+                }
+                else {
+                    print("Making new meta place")
+                    self.metaPlaceUser = MetaPlaceUser()
+                    
+                    self.goodCheckInVC.lastCheckInLabel.text = "Never!"
+                    self.goodCheckInVC.totalCheckInCount.text = "0"
+                }
+                
+                self.goodCheckInVC.metaPlaceUser = self.metaPlaceUser
+            })
+        }
     }
     
     func initLocationManager() {

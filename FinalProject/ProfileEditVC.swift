@@ -40,8 +40,15 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             usernameTextField.text = userData?.username
             favPlaceTextField.text = userData?.favPlace
             
-            DispatchQueue.main.async {
-                self.profileImage.image = self.userData?.profileImage
+            let userImage = self.imagesRef.child(userData!.profilePhotoShortKey)
+            
+            userImage.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let _ = error {
+                    print(error!.localizedDescription)
+                } else {
+                    // Data for "images/island.jpg" is returned
+                    self.profileImage.image = UIImage(data: data!)
+                }
             }
         }
         else { // User is not logged in for whatever reason
@@ -91,7 +98,7 @@ class ProfileEditVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             let imageData = UIImageJPEGRepresentation(profileImage.image!, 0.1)
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-            let imagePath = user.uid + ".jpeg"
+            let imagePath = userData!.profilePhotoShortKey
             
             self.imagesRef.child(imagePath).putData(imageData!, metadata: metadata) {
                 (metadata, error) in

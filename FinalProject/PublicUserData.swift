@@ -37,6 +37,10 @@ class PublicUserData: Codable {
         return self.key
     }
     
+    var profilePhotoShortKey: String {
+        return key + ".jpeg"
+    }
+    
     let ref: DatabaseReference?
     var key: String
     

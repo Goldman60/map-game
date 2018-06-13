@@ -238,7 +238,7 @@
                                 <rect key="frame" x="118.5" y="361" width="138" height="30"/>
                                 <state key="normal" title="Stats and Other Info"/>
                                 <connections>
-                                    <segue destination="NKD-EG-hfm" kind="show" id="qA0-IF-43V"/>
+                                    <segue destination="NKD-EG-hfm" kind="show" identifier="statsSegue" id="qA0-IF-43V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZc-Y4-5ZV">
@@ -420,7 +420,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recentImageCell" id="ZmY-MH-50y">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recentImageCell" id="ZmY-MH-50y" customClass="RecentCheckInCell" customModule="FinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="139" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -433,8 +433,15 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <connections>
+                                            <outlet property="checkInImage" destination="Pbb-9Y-Prf" id="Srn-Bk-fmf"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="NKD-EG-hfm" id="lfZ-C6-3c0"/>
+                                    <outlet property="delegate" destination="NKD-EG-hfm" id="7HK-jR-Ceb"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Check Ins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CX-PG-bXm">
                                 <rect key="frame" x="16" y="104" width="117" height="21"/>
@@ -513,6 +520,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="FRl-G1-jnl"/>
                     </view>
+                    <connections>
+                        <outlet property="mostVisitedLabel" destination="QO6-UI-DBv" id="gY9-yS-dO3"/>
+                        <outlet property="totalCheckInLabel" destination="1u6-Ix-tdC" id="flw-Mr-t6G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGf-Eq-zJv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -610,7 +621,7 @@
                                 <rect key="frame" x="157" y="261" width="60" height="30"/>
                                 <state key="normal" title="Check In"/>
                                 <connections>
-                                    <segue destination="b7h-UC-gPm" kind="show" identifier="doCheckInSegue" id="fU0-7P-xRS"/>
+                                    <action selector="doCheckIn:" destination="Me6-DV-gLn" eventType="touchUpInside" id="Svb-Nc-EOL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -642,6 +653,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X0p-Th-9sF"/>
                     </view>
+                    <connections>
+                        <outlet property="lastCheckInLabel" destination="DWP-AB-Zdn" id="5sv-RL-t4o"/>
+                        <outlet property="totalCheckInCount" destination="uBQ-YH-2Lr" id="rvJ-lq-m3C"/>
+                        <segue destination="b7h-UC-gPm" kind="show" identifier="doCheckInSegue" id="HfG-a9-qKn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NhI-Nr-gQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

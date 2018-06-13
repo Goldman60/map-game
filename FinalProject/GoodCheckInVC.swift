@@ -11,7 +11,11 @@ import UIKit
 class GoodCheckInVC: UIViewController {
     
     var destPlace: Place?
+    var metaPlaceUser: MetaPlaceUser?
 
+    @IBOutlet weak var lastCheckInLabel: UILabel!
+    @IBOutlet weak var totalCheckInCount: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +31,25 @@ class GoodCheckInVC: UIViewController {
     }
     
     @IBAction func unwindFromCancel(segue:UIStoryboardSegue) {
+    }
+    
+    @IBAction func doCheckIn(_ sender: UIButton) {
+        let oneHour = Calendar.current.date(
+            byAdding: .hour,
+            value: -1,
+            to: Date())
+        
+        if metaPlaceUser!.lastCheckIn!.timeIntervalSince(oneHour!) > 0 {
+            let dialog = UIAlertController(title: "Too Soon", message: "You checked in here recently! Wait \(String(format: "%.0f", metaPlaceUser!.lastCheckIn!.timeIntervalSinceNow + 3600)) seconds", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "Try Again Later", style: .cancel, handler: nil)
+            dialog.addAction(action)
+            
+            present(dialog, animated: true, completion: nil)
+        }
+        else {
+            performSegue(withIdentifier: "doCheckInSegue", sender: self)
+        }
     }
     
 

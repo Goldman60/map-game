@@ -69,8 +69,15 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
                 self.usernameLabel.text = self.publicUserData.username
                 self.userPlaceLabel.text = self.publicUserData.favPlace
                 
-                DispatchQueue.main.async {
-                    self.userImageLabel.image = self.publicUserData.profileImage
+                let userImage = self.imagesRef.child(self.publicUserData.profilePhotoShortKey)
+                
+                userImage.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if let _ = error {
+                        print(error!.localizedDescription)
+                    } else {
+                        // Data for "images/island.jpg" is returned
+                        self.userImageLabel.image = UIImage(data: data!)
+                    }
                 }
             })
             
@@ -115,6 +122,11 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "editProfileSegue") {
             let vc = segue.destination as? ProfileEditVC
+            
+            vc?.userData = publicUserData
+        }
+        else if (segue.identifier == "statsSegue") {
+            let vc = segue.destination as? AchievementsVC
             
             vc?.userData = publicUserData
         }

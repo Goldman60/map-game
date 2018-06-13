@@ -20,7 +20,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var geoFire: GeoFire?
     var regionQuery: GFRegionQuery?
     let locationManager = CLLocationManager()
-    let cscBuilding = CLLocationCoordinate2D(latitude: 35.300066, longitude: -120.662065)
+    //let cscBuilding = CLLocationCoordinate2D(latitude: 35.300066, longitude: -120.662065)
     var annotations = [MKPointAnnotation]()
     
     var selectedPlace: Place?
@@ -31,11 +31,11 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         databasePlacesRef = Database.database().reference().child("places")
         geoFire = GeoFire(firebaseRef: Database.database().reference().child("geofire"))
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let newRegion = MKCoordinateRegion(center: cscBuilding, span: span)
-        mapObject.setRegion(newRegion, animated: true)
-        
         initLocationManager()
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let newRegion = MKCoordinateRegion(center: (locationManager.location?.coordinate)!, span: span)
+        mapObject.setRegion(newRegion, animated: true)
         
         //One time Init
         //THIS IS SLOW
@@ -110,6 +110,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100.0
         locationManager.startUpdatingLocation()
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
