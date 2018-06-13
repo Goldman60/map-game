@@ -22,10 +22,31 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
     var metaPlaceUser: MetaPlaceUser?
     var metaplaceRef: DatabaseReference!
     
+    var handle : AuthStateDidChangeListenerHandle?
+    
     private let topStackView = UIStackView()
     fileprivate lazy var goodCheckInVC: GoodCheckInVC = buildFromStoryboard("Main")
     fileprivate lazy var badCheckInVC: BadCheckInVC = buildFromStoryboard("Main")
     let locationManager = CLLocationManager()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if auth.currentUser != nil {
+                self.bottomHalfView.isHidden = false
+            }
+            else {
+                self.bottomHalfView.isHidden = true
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Auth.auth().removeStateDidChangeListener(handle!)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

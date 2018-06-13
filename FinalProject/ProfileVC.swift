@@ -21,6 +21,7 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var editUserLabel: UIButton!
     @IBOutlet weak var userRealNameLabel: UILabel!
+    @IBOutlet weak var statsButton: UIButton!
     
     var publicUserData: PublicUserData = PublicUserData()
     
@@ -65,7 +66,13 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
             imagesRef = Storage.storage().reference().child("profileimages")
             
             self.publicDatabaseRef?.queryOrderedByKey().queryEqual(toValue: user.uid).observe(.value, with: {snapshot in
-                self.publicUserData = PublicUserData(key:user.uid, snapshot:snapshot)
+                if let _ = snapshot.value as? [String : AnyObject] {
+                    self.publicUserData = PublicUserData(key: user.uid, snapshot: snapshot)
+                }
+                else {
+                    self.publicUserData = PublicUserData(key: user.uid)
+                }
+                
                 self.usernameLabel.text = self.publicUserData.username
                 self.userPlaceLabel.text = self.publicUserData.favPlace
                 
@@ -75,8 +82,8 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
                     if let _ = error {
                         print(error!.localizedDescription)
                     } else {
-                        // Data for "images/island.jpg" is returned
                         self.userImageLabel.image = UIImage(data: data!)
+                        self.userImageLabel.isHidden = false
                     }
                 }
             })
@@ -88,6 +95,7 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
             googleSignInButton.isHidden = true
             logoutButton.isHidden = false
             editUserLabel.isHidden = false
+            statsButton.isHidden = false
             
             userEmailLabel.text = user.email
             userRealNameLabel.text = user.displayName
@@ -96,9 +104,13 @@ class ProfileVC: UIViewController, GIDSignInUIDelegate {
             googleSignInButton.isHidden = false
             logoutButton.isHidden = true
             editUserLabel.isHidden = true
+            statsButton.isHidden = true
             
-            userEmailLabel.text = "SIGNED OUT"
-            userRealNameLabel.text = "SIGNED OUT"
+            usernameLabel.text = "Please Sign in!"
+            userPlaceLabel.text = ""
+            userEmailLabel.text = ""
+            userRealNameLabel.text = ""
+            userImageLabel.isHidden = true
         }
     }
     

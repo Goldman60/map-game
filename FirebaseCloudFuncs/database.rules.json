@@ -20,6 +20,10 @@
       	".write": "auth != null",
       	".read": "auth != null",
     },
+    "metaplaces-owners": {
+         ".read": "auth != null",
+         ".write": false,
+    },
     "checkIn": { // Store user check in photos
         "$uid": {
         	".read": "auth != null",

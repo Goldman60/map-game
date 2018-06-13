@@ -287,6 +287,7 @@
                         <outlet property="editUserLabel" destination="MVv-P2-cig" id="nGN-jc-IzZ"/>
                         <outlet property="googleSignInButton" destination="bfd-VW-VoK" id="cK6-Xz-3Py"/>
                         <outlet property="logoutButton" destination="nZc-Y4-5ZV" id="EkJ-bV-1Se"/>
+                        <outlet property="statsButton" destination="IEb-xU-w7C" id="e3r-e1-5D5"/>
                         <outlet property="userEmailLabel" destination="rM0-9N-qq9" id="naF-CA-rSG"/>
                         <outlet property="userImageLabel" destination="Wv4-Pg-lOR" id="Sdn-4Z-Yap"/>
                         <outlet property="userPlaceLabel" destination="Doi-ak-tJQ" id="GJq-gi-Rcs"/>
@@ -617,7 +618,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsl-32-ysZ">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsl-32-ysZ">
                                 <rect key="frame" x="157" y="261" width="60" height="30"/>
                                 <state key="normal" title="Check In"/>
                                 <connections>
@@ -654,6 +655,7 @@
                         <viewLayoutGuide key="safeArea" id="X0p-Th-9sF"/>
                     </view>
                     <connections>
+                        <outlet property="checkInButton" destination="Fsl-32-ysZ" id="9Sh-3z-OAg"/>
                         <outlet property="lastCheckInLabel" destination="DWP-AB-Zdn" id="5sv-RL-t4o"/>
                         <outlet property="totalCheckInCount" destination="uBQ-YH-2Lr" id="rvJ-lq-m3C"/>
                         <segue destination="b7h-UC-gPm" kind="show" identifier="doCheckInSegue" id="HfG-a9-qKn"/>

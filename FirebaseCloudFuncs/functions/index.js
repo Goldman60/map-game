@@ -31,3 +31,36 @@ exports.updateLeaderboard = functions.database.ref('/publicusers/{uid}/checkInCo
             return dataSnapshot.ref.set(newCheckInCount);
          });
    });
+
+//Keeps your most visited place up to date
+exports.updateMostVisited = functions.database.ref('/metaplaces/{placeID}/{userID}/checkInCount')
+   .onWrite((snapshot, context) => {
+      const newCandidate = snapshot.after.val();
+
+      return admin.database().ref('/publicusers/' + context.params.uid + '/mostCheckedInCount').once("value")
+         .then((dataSnapshot) => {
+            if (dataSnapshot.val() === null || dataSnapshot.val() < newCandidate) {
+               dataSnapshot.ref.set(newCandidate);
+               return dataSnapshot.ref.parent.child('mostCheckedInPlace').set(context.params.placeID);
+            }
+            else {
+               return 0;
+            }
+         });
+   });
+
+//Adjudicates the owner of a place
+exports.updatePlaceOwner = functions.database.ref('/metaplaces/{placeID}/{userID}/checkInCount')
+   .onWrite((snapshot, context) => {
+      const newCandidate = snapshot.after.val();
+   
+      return admin.database().ref('/metaplaces-owners/' + context.params.placeID).once("value")
+         .then((dataSnapshot) => {
+            if (dataSnapshot.val() === null || dataSnapshot.child('checkInCount') < newCandidate) {
+               dataSnapshot.ref.child('checkInCount').set(newCandidate);
+               return dataSnapshot.ref.child('ownerID').set(context.params.userID);
+            }
+
+            return 0;
+         });
+   });

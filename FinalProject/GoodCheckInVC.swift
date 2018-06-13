@@ -7,19 +7,42 @@
 //
 
 import UIKit
+import Firebase
 
 class GoodCheckInVC: UIViewController {
     
     var destPlace: Place?
     var metaPlaceUser: MetaPlaceUser?
+    var handle : AuthStateDidChangeListenerHandle?
 
+    @IBOutlet weak var checkInButton: UIButton!
     @IBOutlet weak var lastCheckInLabel: UILabel!
     @IBOutlet weak var totalCheckInCount: UILabel!
     
+    @IBOutlet weak var yourStatsLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if auth.currentUser != nil {
+                self.checkInButton.isEnabled = true
+            }
+            else {
+                self.checkInButton.isEnabled = false
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     override func didReceiveMemoryWarning() {
