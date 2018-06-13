@@ -462,7 +462,7 @@
                                     <constraint firstAttribute="height" constant="92" id="SkT-pF-99z"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="placeOwnerCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeOwnerCell" id="OAj-NP-SOd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="placeOwnerCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeOwnerCell" id="OAj-NP-SOd" customClass="PlaceOwnerCell" customModule="FinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OAj-NP-SOd" id="MFa-Q9-CuB">
@@ -481,8 +481,15 @@
                                                 <constraint firstItem="KBu-s2-SFA" firstAttribute="centerX" secondItem="MFa-Q9-CuB" secondAttribute="centerX" id="lMy-UZ-jB4"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="placeNameLabel" destination="KBu-s2-SFA" id="1T1-yK-wvn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NKD-EG-hfm" id="yoN-iQ-gpU"/>
+                                    <outlet property="delegate" destination="NKD-EG-hfm" id="pMX-zc-T2g"/>
+                                </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yYR-ap-kuN">
                                 <rect key="frame" x="0.0" y="319" width="375" height="331"/>

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     var imagesRef: StorageReference!
     var userData: PublicUserData?
@@ -33,6 +33,19 @@ class AchievementsVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placeOwnerCell", for: indexPath) as! PlaceOwnerCell
+        
+        return cell
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

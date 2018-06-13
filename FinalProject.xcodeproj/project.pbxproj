@@ -12,6 +12,7 @@
 		21875CFE20D0716D0017CDBA /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */; };
 		21875D0020D0947F0017CDBA /* RecentCheckInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875CFF20D0947F0017CDBA /* RecentCheckInCell.swift */; };
 		21875D0220D0A3800017CDBA /* MetaPlaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875D0120D0A3800017CDBA /* MetaPlaceUser.swift */; };
+		21875D0420D0FA880017CDBA /* PlaceOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21875D0320D0FA880017CDBA /* PlaceOwnerCell.swift */; };
 		219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */; };
 		219BDF4720B28FD500AE57D6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 219BDF4620B28FD400AE57D6 /* README.md */; };
 		219BDF4920B29AC200AE57D6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219BDF4820B29AC200AE57D6 /* Place.swift */; };
@@ -40,6 +41,7 @@
 		21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		21875CFF20D0947F0017CDBA /* RecentCheckInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCheckInCell.swift; sourceTree = "<group>"; };
 		21875D0120D0A3800017CDBA /* MetaPlaceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaPlaceUser.swift; sourceTree = "<group>"; };
+		21875D0320D0FA880017CDBA /* PlaceOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOwnerCell.swift; sourceTree = "<group>"; };
 		219BDF4420B28F3800AE57D6 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		219BDF4620B28FD400AE57D6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		219BDF4820B29AC200AE57D6 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				219BDF4E20B2A21D00AE57D6 /* LeaderboardVC.swift */,
 				21875CFD20D0716D0017CDBA /* LeaderboardCell.swift */,
 				21875CFB20D06B8A0017CDBA /* AchievementsVC.swift */,
+				21875D0320D0FA880017CDBA /* PlaceOwnerCell.swift */,
 				21875CFF20D0947F0017CDBA /* RecentCheckInCell.swift */,
 				21C28B8020B0DFA700E34298 /* MapVC.swift */,
 				21C28B8220B0DFA700E34298 /* ProfileVC.swift */,
@@ -301,6 +304,7 @@
 				219BDF4520B28F3800AE57D6 /* ProfileEditVC.swift in Sources */,
 				219BDF4F20B2A21D00AE57D6 /* LeaderboardVC.swift in Sources */,
 				219BDF4D20B2A1D800AE57D6 /* CheckInVC.swift in Sources */,
+				21875D0420D0FA880017CDBA /* PlaceOwnerCell.swift in Sources */,
 				21C28B8120B0DFA700E34298 /* MapVC.swift in Sources */,
 				219BDF5320B3F69700AE57D6 /* BadCheckInVC.swift in Sources */,
 				21B91FA520BE2E98007EE964 /* DoCheckInVC.swift in Sources */,
